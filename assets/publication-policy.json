@@ -2,7 +2,8 @@
   "schemaVersion": 1,
   "mode": "selected-final-only",
   "selectedVersions": {
-    "M001": "v2"
+    "M001": "v2",
+    "M002": "v1"
   },
   "excludedVersions": {
     "M001": [
