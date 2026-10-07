@@ -3,7 +3,7 @@
   "mode": "selected-final-only",
   "selectedVersions": {
     "M001": "v2",
-    "M002": "v1"
+    "M002": "v2"
   },
   "excludedVersions": {
     "M001": [
@@ -13,6 +13,9 @@
   "retiredPaths": [
     "assets/motion/M001/v1/poster.jpg",
     "assets/motion/M001/v1/preview.mp4",
-    "assets/motion/M001/v1/source.zip"
+    "assets/motion/M001/v1/source.zip",
+    "assets/motion/M002/v1/poster.jpg",
+    "assets/motion/M002/v1/preview.mp4",
+    "assets/motion/M002/v1/source.zip"
   ]
 }
