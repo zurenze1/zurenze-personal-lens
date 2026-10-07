@@ -13,10 +13,13 @@ http.createServer((req,res) => {
     let entries=[];
     try {
       const record=JSON.parse(fs.readFileSync(recordPath,'utf8'));
+      const policy=JSON.parse(fs.readFileSync(path.join(root,'assets/publication-policy.json'),'utf8'));
       const base='/local-shots/M001-paper-fan/';
       const notes=(record.phases||[]).map(phase=>`${phase.start}–${phase.end}s / ${phase.title}\n观察：${phase.observation}\n复用：${phase.method}`).join('\n\n');
       entries.push({id:'local-archive-M001',kind:'note',title:'M001 · 案例纸卡扇形展开',tags:['视频拆解','纸卡','错峰入场'],description:notes,file:base+'reference.mp4',fileName:'M001-本地参考.mp4',thumbnail:base+'poster.jpg',source:'http://127.0.0.1:5198'+base+'拆解网页.html',local:false,localOnly:true});
       for(const [directory,label] of [['reusable-personal','原纸卡版'],['reusable-personal-v2','真实照片版']]) {
+        const version=directory==='reusable-personal'?'v1':'v2';
+        if((policy.excludedVersions?.M001||[]).includes(version) || (policy.selectedVersions?.M001 && policy.selectedVersions.M001!==version)) continue;
         const reusable=path.join(localShots,'M001-paper-fan',directory);
         if(!fs.existsSync(reusable)) continue;
         for(const name of fs.readdirSync(reusable)) {

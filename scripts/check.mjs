@@ -5,6 +5,7 @@ const html = fs.readFileSync(path.join(root,'index.html'),'utf8');
 const photos = JSON.parse(fs.readFileSync(path.join(root,'assets/photos.json'),'utf8'));
 const assets = JSON.parse(fs.readFileSync(path.join(root,'assets/library.json'),'utf8'));
 const taxonomy = JSON.parse(fs.readFileSync(path.join(root,'assets/taxonomy.json'),'utf8'));
+const policy=JSON.parse(fs.readFileSync(path.join(root,'assets/publication-policy.json'),'utf8'));
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
 const failures = [];
 if(new Set(ids).size!==ids.length) failures.push('Duplicate HTML IDs');
@@ -18,7 +19,14 @@ const embedded=JSON.parse(html.match(/<script type="application\/json" id="asset
 if(JSON.stringify(embedded)!==JSON.stringify(assets)) failures.push('Embedded catalog is stale; run npm run build');
 const categories=new Set(taxonomy.categories.map(c=>c.id));
 const topics=new Set(taxonomy.topics.flatMap(g=>g.values));
+const selectedShots=new Set();
 for(const item of assets) {
+  if(item.kind==='motion' && item.shotId && policy.mode==='selected-final-only') {
+    if(selectedShots.has(item.shotId))failures.push(`Multiple public versions: ${item.shotId}`);
+    selectedShots.add(item.shotId);
+    if((policy.excludedVersions[item.shotId]||[]).includes(item.version))failures.push(`Excluded version republished: ${item.id}`);
+    if(policy.selectedVersions[item.shotId]!==item.version)failures.push(`Unselected public version: ${item.id}`);
+  }
   for(const key of ['file','thumbnail','sourcePackage','breakdownFile']) if(item[key] && !fs.existsSync(path.join(root,item[key])))failures.push(`Missing ${key}: ${item[key]}`);
   if(!html.includes(`class="shot media-card" data-id="${item.id}"`)) failures.push(`Missing gallery entry: ${item.id}`);
   if(item.shotId) {
@@ -35,7 +43,7 @@ for(const match of html.matchAll(/\b(?:href|src)="([^"]+)"/g)){
   if(!fs.existsSync(path.join(root,url))) failures.push(`Missing resource: ${url}`);
 }
 for(const file of ['assets/video/introduction.mp4','assets/video/military.mp4']) if(!fs.existsSync(path.join(root,file))) failures.push(`Missing video: ${file}`);
-const publicText=new Set(['index.html','app.js','style.css','assets/photos.json','assets/library.json','assets/taxonomy.json','docs/分类与流程.md',...assets.filter(i=>i.breakdownFile).map(i=>i.breakdownFile)]);
+const publicText=new Set(['index.html','app.js','style.css','assets/photos.json','assets/library.json','assets/taxonomy.json','assets/publication-policy.json','docs/分类与流程.md',...assets.filter(i=>i.breakdownFile).map(i=>i.breakdownFile)]);
 for(const file of publicText) {
   const content=fs.readFileSync(path.join(root,file),'utf8');
   if(/\/Users\/|access_token|ghp_[A-Za-z0-9]+|github_pat_[A-Za-z0-9]+/.test(content)) failures.push(`Private data in public file: ${file}`);

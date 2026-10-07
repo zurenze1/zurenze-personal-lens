@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "mode": "selected-final-only",
+  "selectedVersions": {
+    "M001": "v2"
+  },
+  "excludedVersions": {
+    "M001": [
+      "v1"
+    ]
+  },
+  "retiredPaths": [
+    "assets/motion/M001/v1/poster.jpg",
+    "assets/motion/M001/v1/preview.mp4",
+    "assets/motion/M001/v1/source.zip"
+  ]
+}
