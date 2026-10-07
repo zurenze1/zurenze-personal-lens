@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "categories": [
+    {"id":"opening","label":"开场与身份","examples":"片头、人物入场、姓名、品牌标识"},
+    {"id":"text","label":"文字与观点","examples":"金句、重点字幕、观点对比"},
+    {"id":"information","label":"信息展示","examples":"资料卡、时间线、图表、屏幕演示"},
+    {"id":"transition","label":"转场与衔接","examples":"遮罩、推拉、匹配切换"},
+    {"id":"atmosphere","label":"镜头与氛围","examples":"景深、粒子、光影、情绪空镜"},
+    {"id":"closing","label":"收尾与引导","examples":"总结、结尾、关注提示"}
+  ],
+  "topics": [
+    {"group":"AI内容","values":["AI工具","AI趋势","AI教程","AI创作"]},
+    {"group":"个人口播","values":["自我介绍","儒家","佛学","道家","个人成长","思考表达","生活记录","工作分享"]}
+  ],
+  "formats":["16:9","9:16","1:1","other"]
+}

@@ -1,5 +1,121 @@
 [
   {
+    "id": "motion-M001-v2",
+    "kind": "motion",
+    "shotId": "M001",
+    "version": "v2",
+    "title": "M001 · 六页经历／真实照片版",
+    "tags": [
+      "信息展示",
+      "真实照片",
+      "自我介绍"
+    ],
+    "motionCategory": "information",
+    "topics": [
+      "自我介绍",
+      "个人成长",
+      "AI创作",
+      "思考表达"
+    ],
+    "styleTags": [
+      "真实照片",
+      "卡片",
+      "扇形展开",
+      "错峰入场"
+    ],
+    "description": "用本人真实照片承载六项经历；保留纸卡扇形动作，匹配个人介绍影片的奶油白、深墨色与珊瑚色。当前推荐版本。无音轨，适合叠加自己的口播；源包可改姓名、照片、六卡内容、配色和时长。",
+    "file": "assets/motion/M001/v2/preview.mp4",
+    "fileName": "M001-v2.mp4",
+    "thumbnail": "assets/motion/M001/v2/poster.jpg",
+    "sourcePackage": "assets/motion/M001/v2/source.zip",
+    "breakdownFile": "motions/M001.html",
+    "duration": "6.2秒",
+    "durationSeconds": 6.2,
+    "aspectRatio": "16:9",
+    "width": 1920,
+    "height": 1080,
+    "fps": "30/1",
+    "engine": "HyperFrames",
+    "hasAudio": false,
+    "sha256": "25caef43ed675134bb248f54a2b8ead9e66091830e9c8afe009e409d04ebcf70",
+    "created": "2026-10-07T10:35:00Z",
+    "status": "completed",
+    "reusable": true,
+    "source": ""
+  },
+  {
+    "id": "motion-M001-v1",
+    "kind": "motion",
+    "shotId": "M001",
+    "version": "v1",
+    "title": "M001 · 六页经历／原纸卡版",
+    "tags": [
+      "信息展示",
+      "纸卡",
+      "自我介绍"
+    ],
+    "motionCategory": "information",
+    "topics": [
+      "自我介绍",
+      "个人成长",
+      "AI创作",
+      "思考表达"
+    ],
+    "styleTags": [
+      "纸卡",
+      "扇形展开",
+      "错峰入场"
+    ],
+    "description": "六张资料纸卡错峰展开，姓名、人像和圆形底板形成个人开场。可替换姓名、照片、卡片文字、配色与时长。保留的原纸卡版本。",
+    "file": "assets/motion/M001/v1/preview.mp4",
+    "fileName": "M001-v1.mp4",
+    "thumbnail": "assets/motion/M001/v1/poster.jpg",
+    "sourcePackage": "assets/motion/M001/v1/source.zip",
+    "breakdownFile": "motions/M001.html",
+    "duration": "6.2秒",
+    "durationSeconds": 6.2,
+    "aspectRatio": "16:9",
+    "width": 1920,
+    "height": 1080,
+    "fps": "30/1",
+    "engine": "HyperFrames",
+    "hasAudio": false,
+    "sha256": "4da12c0cd657973f154eb51da02ba0928e3d0a09cc82756b05a368c11db77e1e",
+    "created": "2026-10-07T10:05:00Z",
+    "status": "completed",
+    "reusable": true,
+    "source": ""
+  },
+  {
+    "id": "breakdown-M001",
+    "kind": "note",
+    "shotId": "M001",
+    "title": "M001 · 扇形卡片／动作与复用拆解",
+    "motionCategory": "information",
+    "topics": [
+      "自我介绍",
+      "个人成长",
+      "AI创作",
+      "思考表达"
+    ],
+    "styleTags": [
+      "扇形展开",
+      "错峰入场"
+    ],
+    "tags": [
+      "动效拆解",
+      "图层与节奏",
+      "可复用工程"
+    ],
+    "description": "人物建立 → 圆形底板扩张 → 六张卡片错峰展开 → 末尾1.4秒阅读停留。\n\n参考观察与复刻工程分开记录；精确缓动不能从录屏确认。公开拆解页提供两版完成片、可修改源包、图层节奏与口播/AI用法。\n\n适用于经历清单、观点集合与工具对比。当前两版均为横屏6.2秒，无音轨。",
+    "aspectRatio": "16:9",
+    "duration": "6.2秒",
+    "engine": "HyperFrames",
+    "breakdownFile": "motions/M001.html",
+    "source": "",
+    "created": "2026-10-07T11:00:00Z"
+  },
+  {
     "id": "film-introduction",
     "kind": "video",
     "title": "我的自我介绍",

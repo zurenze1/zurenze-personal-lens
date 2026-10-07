@@ -1,6 +1,8 @@
 (() => {
   'use strict';
   const builtins = JSON.parse(document.getElementById('asset-data').textContent);
+  const taxonomy = JSON.parse(document.getElementById('taxonomy-data').textContent);
+  const categoryLabel = Object.fromEntries(taxonomy.categories.map(c=>[c.id,c.label]));
   const kindLabel = {photo:'图片', video:'镜头', motion:'动效', audio:'音频', note:'拆解'};
   const mediaUrls = new Map();
   let localItems = [];
@@ -8,6 +10,9 @@
   let filtered = items;
   let typeFilter = 'all';
   let tagFilter = '全部主题';
+  let purposeFilter = '';
+  let topicFilter = '';
+  let formatFilter = '';
   let query = '';
   let sortOrder = 'kind';
   let activeId = null;
@@ -36,9 +41,13 @@
   }
   function allItems() { items = [...builtins, ...localItems]; }
   function visibleItems() {
-    const result=items.filter(item => (typeFilter === 'trash' ? item.trash : !item.trash) && (['all','trash'].includes(typeFilter) || (typeFilter === 'favorites' ? favorites.has(item.id) : item.kind === typeFilter)) && (tagFilter === '全部主题' || item.tags.includes(tagFilter)) && `${item.title} ${item.description} ${item.tags.join(' ')} ${kindLabel[item.kind]} ${item.fileName || ''}`.toLowerCase().includes(query));
+    const result=items.filter(item => (typeFilter === 'trash' ? item.trash : !item.trash) && (['all','trash'].includes(typeFilter) || (typeFilter === 'favorites' ? favorites.has(item.id) : item.kind === typeFilter)) && (tagFilter === '全部主题' || item.tags.includes(tagFilter)) && (!purposeFilter || item.motionCategory===purposeFilter) && (!topicFilter || (item.topics||[]).includes(topicFilter)) && (!formatFilter || item.aspectRatio===formatFilter) && `${item.title} ${item.description} ${item.tags.join(' ')} ${(item.topics||[]).join(' ')} ${(item.styleTags||[]).join(' ')} ${categoryLabel[item.motionCategory]||''} ${item.shotId||''} ${kindLabel[item.kind]} ${item.fileName || ''}`.toLowerCase().includes(query));
     const priority={motion:0,video:1,note:2,photo:3,audio:4};
     return result.sort((a,b)=>sortOrder==='title'?a.title.localeCompare(b.title,'zh-CN'):sortOrder==='recent'?(Date.parse(b.created||'')||0)-(Date.parse(a.created||'')||0):priority[a.kind]-priority[b.kind]);
+  }
+  function resetMotionFilters() {
+    purposeFilter=topicFilter=formatFilter='';
+    for(const id of ['purpose-filter','topic-filter','format-filter'])document.getElementById(id).value='';
   }
   function renderTags() {
     const allTags = [...new Set(items.filter(i=>!i.trash).flatMap(item=>item.tags))];
@@ -78,7 +87,7 @@
     document.getElementById('detail-kind').textContent=`${kindLabel[item.kind]} / ${item.local?'仅此浏览器':item.localOnly?'本地镜头档案':'本站素材'}`;
     document.getElementById('detail-tags').textContent=item.tags.map(t=>'#'+t).join(' ');
     document.getElementById('detail-description').textContent=item.description||'暂无备注';
-    document.getElementById('detail-info').textContent=item.local?`${item.fileName||'拆解笔记'}${item.size?' · '+(item.size/1024/1024).toFixed(2)+' MB':''} · ${item.created.slice(0,10)}`:item.localOnly?'本地镜头档案 · 未上传 · 文件保留在本机':item.kind==='photo'?'WebP 网页素材 · 点击取用后可用于个人视频制作':'完整原声视频 · 可拖动进度选择需要的段落';
+    document.getElementById('detail-info').textContent=item.local?`${item.fileName||'拆解笔记'}${item.size?' · '+(item.size/1024/1024).toFixed(2)+' MB':''} · ${item.created.slice(0,10)}`:item.localOnly?'本地镜头档案 · 未上传 · 文件保留在本机':item.shotId?`${item.shotId} · ${categoryLabel[item.motionCategory]} · ${(item.topics||[]).join(' / ')} · ${item.aspectRatio} · ${item.duration||''} · ${item.engine||''}${item.kind==='motion'?' · '+(item.hasAudio?'有音轨':'无音轨，可叠加口播'):''}`:item.kind==='photo'?'WebP 网页素材 · 点击取用后可用于个人视频制作':'完整原声视频 · 可拖动进度选择需要的段落';
     let media;
     if(item.kind==='photo'){media=document.createElement('img');media.src=fileUrl(item);media.alt=item.description||item.title;}
     else if(item.kind==='note'){if(item.file){const reference=document.createElement('video');reference.src=fileUrl(item);reference.controls=true;reference.preload='metadata';reference.setAttribute('playsinline','');if(item.thumbnail)reference.poster=item.thumbnail;stage.append(reference);}media=document.createElement('div');media.className='detail-note';media.textContent=item.description||'暂无拆解内容';}
@@ -86,6 +95,8 @@
     stage.append(media);
     const take=document.getElementById('take-asset');take.hidden=item.kind==='note'&&!item.file;take.href=take.hidden?'#':fileUrl(item);take.download=item.fileName||item.file?.split('/').pop()||'素材';take.textContent=item.kind==='photo'?'取用图片 ↓':item.kind==='audio'?'取用音频 ↓':item.kind==='note'?'本地参考片 ↓':'取用视频 ↓';
     const source=document.getElementById('detail-source');source.hidden=!item.source;source.href=item.source||'#';source.textContent=item.localOnly&&item.kind==='note'?'查看完整拆解 ↗':item.kind==='note'?'打开参考视频 ↗':'查看素材来源 ↗';
+    const reusable=document.getElementById('detail-package');reusable.hidden=!item.sourcePackage;reusable.href=item.sourcePackage||'#';reusable.download=(item.sourcePackage||'').split('/').pop();
+    const breakdown=document.getElementById('detail-breakdown');breakdown.hidden=!item.breakdownFile;breakdown.href=item.breakdownFile||'#';
     document.getElementById('edit-item').hidden=!item.local;
     const trash=document.getElementById('trash-item');trash.hidden=!item.local;trash.textContent=item.trash?'恢复素材':'移到回收站';
     const collection=filtered.some(i=>i.id===id)?filtered:items.filter(i=>!i.trash);
@@ -129,14 +140,18 @@
     const blob=new Blob([JSON.stringify(catalog,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=`祖仁泽素材清单-${new Date().toISOString().slice(0,10)}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notify('已导出目录与拆解笔记；素材原件请单独保留');
   }
   gallery.addEventListener('click',event=>{const favorite=event.target.closest('[data-favorite]');const open=event.target.closest('[data-open]');if(favorite)toggleFavorite(favorite.dataset.favorite);else if(open)openDetail(open.dataset.open);});
-  document.querySelectorAll('[data-type]').forEach(button=>button.addEventListener('click',()=>{typeFilter=button.dataset.type;if(button.classList.contains('side-link')){tagFilter='全部主题';query='';document.getElementById('search').value='';renderTags();document.getElementById('collection').scrollIntoView({block:'start'});}render();}));
+  document.querySelectorAll('[data-type]').forEach(button=>button.addEventListener('click',()=>{typeFilter=button.dataset.type;resetMotionFilters();if(button.classList.contains('side-link')){tagFilter='全部主题';query='';document.getElementById('search').value='';renderTags();document.getElementById('collection').scrollIntoView({block:'start'});}render();}));
+  document.getElementById('purpose-filter').addEventListener('change',event=>{purposeFilter=event.target.value;render();});
+  document.getElementById('topic-filter').addEventListener('change',event=>{topicFilter=event.target.value;render();});
+  document.getElementById('format-filter').addEventListener('change',event=>{formatFilter=event.target.value;render();});
+  document.getElementById('clear-motion-filters').addEventListener('click',()=>{resetMotionFilters();tagFilter='全部主题';query='';document.getElementById('search').value='';render();});
   document.getElementById('sort-order').addEventListener('change',event=>{sortOrder=event.target.value;render();});
   document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>{gallery.dataset.view=button.dataset.view;storage.set('zurenze-lens-view',button.dataset.view);document.querySelectorAll('.view-button').forEach(control=>control.setAttribute('aria-pressed',String(control===button)));}));
   const view=storage.get('zurenze-lens-view','comfortable');
   if(['comfortable','compact'].includes(view)){gallery.dataset.view=view;document.querySelectorAll('.view-button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.view===view)));}
   document.getElementById('tag-filters').addEventListener('click',event=>{const button=event.target.closest('[data-tag]');if(button){tagFilter=button.dataset.tag;render();}});
   document.getElementById('search').addEventListener('input',event=>{query=event.target.value.trim().toLowerCase();render();});
-  document.getElementById('reset-search').addEventListener('click',()=>{query='';typeFilter='all';tagFilter='全部主题';document.getElementById('search').value='';renderTags();render();});
+  document.getElementById('reset-search').addEventListener('click',()=>{query='';typeFilter='all';tagFilter='全部主题';resetMotionFilters();document.getElementById('search').value='';renderTags();render();});
   document.querySelectorAll('[data-import]').forEach(button=>button.addEventListener('click',()=>{document.getElementById('import-status').textContent='';openDialog(importDialog);}));
   document.querySelectorAll('[data-note]').forEach(button=>button.addEventListener('click',openNote));
   document.getElementById('import-form').addEventListener('submit',event=>{event.preventDefault();importFiles();});
@@ -158,8 +173,12 @@
   document.getElementById('motion-toggle').addEventListener('click',()=>{motionEnabled=!motionEnabled;storage.set('zurenze-lens-motion',motionEnabled);syncMotion();});
   preference.addEventListener('change',event=>{if(event.matches){motionEnabled=false;syncMotion();}});
   syncMotion();renderTags();render();
+  if(location.hash.startsWith('#asset=')) {
+    const id=decodeURIComponent(location.hash.slice(7));
+    if(builtins.some(item=>item.id===id))openDetail(id);
+  }
   if(['localhost','127.0.0.1','::1'].includes(location.hostname)) {
-    fetch('/local-library.json').then(response=>response.ok?response.json():[]).then(entries=>{if(!Array.isArray(entries))return;for(const entry of entries)if(entry.localOnly&&!builtins.some(item=>item.id===entry.id))builtins.push(entry);allItems();renderTags();render();}).catch(()=>{});
+    fetch('/local-library.json').then(response=>response.ok?response.json():[]).then(entries=>{if(!Array.isArray(entries))return;for(const entry of entries)if(entry.localOnly&&!builtins.some(item=>item.id===entry.id || (item.sha256&&item.sha256===entry.sha256)))builtins.push(entry);allItems();renderTags();render();}).catch(()=>{});
   }
   try {
     const request=indexedDB.open('zurenze-personal-lens',1);

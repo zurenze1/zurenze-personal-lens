@@ -1,6 +1,7 @@
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
+const crypto = require('node:crypto');
 const root = __dirname;
 const localShots = path.resolve(root,'../shots');
 const mime = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.webp':'image/webp','.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.md':'text/plain; charset=utf-8','.svg':'image/svg+xml','.mp4':'video/mp4','.xml':'application/xml; charset=utf-8'};
@@ -24,7 +25,7 @@ http.createServer((req,res) => {
           const stat=fs.statSync(file);
           if(!stat.isFile() || !stat.size) continue;
           const thumbnail=fs.existsSync(path.join(reusable,'poster.jpg'))?base+directory+'/poster.jpg':undefined;
-          entries.push({id:'local-motion-M001-'+(directory==='reusable-personal'?'':directory+'-')+name,kind:'motion',title:'M001 · '+label,tags:['个人开场',label,'自制动效'],description:'本地制作的个人开场动效。完成状态与具体参数以同目录交付说明为准。',file:base+directory+'/'+encodeURIComponent(name),fileName:name,thumbnail,created:stat.mtime.toISOString(),source:'',local:false,localOnly:true});
+          entries.push({id:'local-motion-M001-'+(directory==='reusable-personal'?'':directory+'-')+name,kind:'motion',title:'M001 · '+label,tags:['个人开场',label,'自制动效'],description:'本地制作的个人开场动效。完成状态与具体参数以同目录交付说明为准。',file:base+directory+'/'+encodeURIComponent(name),fileName:name,thumbnail,created:stat.mtime.toISOString(),sha256:crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'),source:'',local:false,localOnly:true});
         }
       }
     } catch { /* Local reference is optional and is never part of the public repository. */ }

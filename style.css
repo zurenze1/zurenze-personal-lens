@@ -18,3 +18,12 @@ body[data-motion=off] *{animation:none!important;transition:none!important}html:
 .shot-open img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .shot[data-kind=video] img{object-position:center 50%}
 .shot[data-id="film-introduction"] img{object-position:center 75%}
+.motion-facets{display:flex;align-items:end;flex-wrap:wrap;gap:10px;margin:15px 0 18px;padding:15px 16px;border:1px solid var(--line);border-radius:6px;background:#1e2119}
+.motion-facets label{display:flex;flex-direction:column;gap:7px;font-size:9px;color:var(--muted);min-width:150px;flex:1}
+.motion-facets select{width:100%;min-height:38px;border:1px solid #465236;border-radius:4px;background:#242a1d;color:var(--paper);padding:8px 10px;font:11px var(--sans)}
+.motion-facets>button{min-height:38px;padding:8px 11px;color:var(--accent);font-size:10px}
+.facet-note{width:100%;margin:2px 0 0;font-size:9px;line-height:1.8;color:var(--muted)}
+.shot[data-kind=motion] .shot-image{aspect-ratio:16/9}
+.shot[data-kind=motion] img{object-fit:contain;background:#f7f3e7}
+.workflow-document{display:inline-block;margin-top:22px;color:var(--accent);font-size:11px;border-bottom:1px solid #64774b;padding-bottom:5px}
+@media(max-width:680px){.motion-facets{gap:10px;padding:12px}.motion-facets label{min-width:110px}.motion-facets label:last-of-type{flex-basis:110px}.facet-note{font-size:8px}.motion-facets>button{font-size:9px}.motion-facets select{font-size:10px}}
