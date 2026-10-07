@@ -15,10 +15,17 @@ http.createServer((req,res) => {
       const base='/local-shots/M001-paper-fan/';
       const notes=(record.phases||[]).map(phase=>`${phase.start}–${phase.end}s / ${phase.title}\n观察：${phase.observation}\n复用：${phase.method}`).join('\n\n');
       entries.push({id:'local-archive-M001',kind:'note',title:'M001 · 案例纸卡扇形展开',tags:['视频拆解','纸卡','错峰入场'],description:notes,file:base+'reference.mp4',fileName:'M001-本地参考.mp4',thumbnail:base+'poster.jpg',source:'http://127.0.0.1:5198'+base+'拆解网页.html',local:false,localOnly:true});
-      const reusable=path.join(localShots,'M001-paper-fan','reusable-personal');
-      if(fs.existsSync(reusable)) for(const name of fs.readdirSync(reusable)) {
-        if(path.extname(name).toLowerCase()!=='.mp4') continue;
-        entries.push({id:'local-motion-M001-'+name,kind:'motion',title:'M001 · '+path.basename(name,'.mp4'),tags:['个人开场','纸卡','自制动效'],description:'本地制作的个人资料纸卡动效。完成状态与具体参数以同目录交付说明为准。',file:base+'reusable-personal/'+encodeURIComponent(name),fileName:name,source:'',local:false,localOnly:true});
+      for(const [directory,label] of [['reusable-personal','原纸卡版'],['reusable-personal-v2','真实照片版']]) {
+        const reusable=path.join(localShots,'M001-paper-fan',directory);
+        if(!fs.existsSync(reusable)) continue;
+        for(const name of fs.readdirSync(reusable)) {
+          if(path.extname(name).toLowerCase()!=='.mp4') continue;
+          const file=path.join(reusable,name);
+          const stat=fs.statSync(file);
+          if(!stat.isFile() || !stat.size) continue;
+          const thumbnail=fs.existsSync(path.join(reusable,'poster.jpg'))?base+directory+'/poster.jpg':undefined;
+          entries.push({id:'local-motion-M001-'+(directory==='reusable-personal'?'':directory+'-')+name,kind:'motion',title:'M001 · '+label,tags:['个人开场',label,'自制动效'],description:'本地制作的个人开场动效。完成状态与具体参数以同目录交付说明为准。',file:base+directory+'/'+encodeURIComponent(name),fileName:name,thumbnail,created:stat.mtime.toISOString(),source:'',local:false,localOnly:true});
+        }
       }
     } catch { /* Local reference is optional and is never part of the public repository. */ }
     const body=JSON.stringify(entries);res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Content-Length':Buffer.byteLength(body),'Cache-Control':'no-cache'});res.end(req.method==='HEAD'?undefined:body);return;

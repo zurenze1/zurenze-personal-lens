@@ -9,6 +9,7 @@
   let typeFilter = 'all';
   let tagFilter = '全部主题';
   let query = '';
+  let sortOrder = 'kind';
   let activeId = null;
   let previousFocus = null;
   let editingId = null;
@@ -34,7 +35,11 @@
     return mediaUrls.get(item.id) || '';
   }
   function allItems() { items = [...builtins, ...localItems]; }
-  function visibleItems() { return items.filter(item => (typeFilter === 'trash' ? item.trash : !item.trash) && (['all','trash'].includes(typeFilter) || (typeFilter === 'favorites' ? favorites.has(item.id) : item.kind === typeFilter)) && (tagFilter === '全部主题' || item.tags.includes(tagFilter)) && `${item.title} ${item.description} ${item.tags.join(' ')} ${kindLabel[item.kind]} ${item.fileName || ''}`.toLowerCase().includes(query)); }
+  function visibleItems() {
+    const result=items.filter(item => (typeFilter === 'trash' ? item.trash : !item.trash) && (['all','trash'].includes(typeFilter) || (typeFilter === 'favorites' ? favorites.has(item.id) : item.kind === typeFilter)) && (tagFilter === '全部主题' || item.tags.includes(tagFilter)) && `${item.title} ${item.description} ${item.tags.join(' ')} ${kindLabel[item.kind]} ${item.fileName || ''}`.toLowerCase().includes(query));
+    const priority={motion:0,video:1,note:2,photo:3,audio:4};
+    return result.sort((a,b)=>sortOrder==='title'?a.title.localeCompare(b.title,'zh-CN'):sortOrder==='recent'?(Date.parse(b.created||'')||0)-(Date.parse(a.created||'')||0):priority[a.kind]-priority[b.kind]);
+  }
   function renderTags() {
     const allTags = [...new Set(items.filter(i=>!i.trash).flatMap(item=>item.tags))];
     if (!allTags.includes(tagFilter)) tagFilter='全部主题';
@@ -48,7 +53,7 @@
     else if(item.thumbnail) cover=`<img src="${escape(item.thumbnail)}" alt="${escape(item.title)}封面" loading="lazy"><span class="cover-play" aria-hidden="true">▶</span>`;
     else if(item.kind==='note') cover=`<div class="note-cover"><strong>拆解笔记 ↗</strong><p>${escape(item.description||'记录参考、制作思路与实现方法。')}</p></div>`;
     else cover=`<div class="audio-cover"><svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">${item.kind==='audio'?'<path d="M12 34v12m9-24v36m9-43v50m10-60v70m10-48v26m10-31v36m9-22v8"/>':'<rect x="10" y="17" width="60" height="46" rx="2"/><path d="m34 29 17 11-17 11Z"/>'}</svg></div>`;
-    return `<figure class="shot media-card" data-id="${escape(item.id)}"><div class="shot-image"><button class="shot-open" type="button" data-open="${escape(item.id)}" aria-label="预览素材：${escape(item.title)}">${cover}</button><span class="media-type">${kindLabel[item.kind]}${item.duration?' / '+escape(item.duration):''}</span><button class="shot-favorite" type="button" data-favorite="${escape(item.id)}" aria-pressed="${saved}" aria-label="${saved?'取消收藏':'收藏'}：${escape(item.title)}">${saved?'♥':'♡'}</button></div><figcaption><div><h3>${escape(item.title)}</h3><small>${escape(item.tags.slice(0,3).join(' / ')||'未分类')}</small>${item.local?'<small class="local-label">仅此浏览器'+(item.trash?' · 回收站':'')+'</small>':item.localOnly?'<small class="local-label">本地镜头档案 · 未上传</small>':''}</div><span class="shot-number">${number}</span></figcaption></figure>`;
+    return `<figure class="shot media-card" data-id="${escape(item.id)}" data-kind="${item.kind}"><div class="shot-image"><button class="shot-open" type="button" data-open="${escape(item.id)}" aria-label="预览素材：${escape(item.title)}">${cover}<span class="preview-label" aria-hidden="true">打开预览 ↗</span></button><span class="media-type">${kindLabel[item.kind]}${item.duration?' / '+escape(item.duration):''}</span><button class="shot-favorite" type="button" data-favorite="${escape(item.id)}" aria-pressed="${saved}" aria-label="${saved?'取消收藏':'收藏'}：${escape(item.title)}">${saved?'♥':'♡'}</button></div><figcaption><div><h3>${escape(item.title)}</h3><small>${escape(item.tags.slice(0,3).join(' / ')||'未分类')}</small>${item.local?'<small class="local-label">仅此浏览器'+(item.trash?' · 回收站':'')+'</small>':item.localOnly?'<small class="local-label">本地镜头档案 · 未上传</small>':''}</div><div class="card-right"><span class="shot-number">${number}</span>${item.file||item.blob?`<a class="quick-take" href="${escape(fileUrl(item))}" download="${escape(item.fileName||item.file?.split('/').pop()||item.title)}" aria-label="取用素材：${escape(item.title)}">↓</a>`:''}</div></figcaption></figure>`;
   }
   function render() {
     allItems(); filtered=visibleItems(); gallery.innerHTML=filtered.map(card).join('');
@@ -73,7 +78,7 @@
     document.getElementById('detail-kind').textContent=`${kindLabel[item.kind]} / ${item.local?'仅此浏览器':item.localOnly?'本地镜头档案':'本站素材'}`;
     document.getElementById('detail-tags').textContent=item.tags.map(t=>'#'+t).join(' ');
     document.getElementById('detail-description').textContent=item.description||'暂无备注';
-    document.getElementById('detail-info').textContent=item.local?`${item.fileName||'拆解笔记'}${item.size?' · '+(item.size/1024/1024).toFixed(2)+' MB':''} · ${item.created.slice(0,10)}`:item.kind==='photo'?'WebP 网页素材 · 点击取用后可用于个人视频制作':'完整原声视频 · 可拖动进度选择需要的段落';
+    document.getElementById('detail-info').textContent=item.local?`${item.fileName||'拆解笔记'}${item.size?' · '+(item.size/1024/1024).toFixed(2)+' MB':''} · ${item.created.slice(0,10)}`:item.localOnly?'本地镜头档案 · 未上传 · 文件保留在本机':item.kind==='photo'?'WebP 网页素材 · 点击取用后可用于个人视频制作':'完整原声视频 · 可拖动进度选择需要的段落';
     let media;
     if(item.kind==='photo'){media=document.createElement('img');media.src=fileUrl(item);media.alt=item.description||item.title;}
     else if(item.kind==='note'){if(item.file){const reference=document.createElement('video');reference.src=fileUrl(item);reference.controls=true;reference.preload='metadata';reference.setAttribute('playsinline','');if(item.thumbnail)reference.poster=item.thumbnail;stage.append(reference);}media=document.createElement('div');media.className='detail-note';media.textContent=item.description||'暂无拆解内容';}
@@ -124,7 +129,11 @@
     const blob=new Blob([JSON.stringify(catalog,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=`祖仁泽素材清单-${new Date().toISOString().slice(0,10)}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notify('已导出目录与拆解笔记；素材原件请单独保留');
   }
   gallery.addEventListener('click',event=>{const favorite=event.target.closest('[data-favorite]');const open=event.target.closest('[data-open]');if(favorite)toggleFavorite(favorite.dataset.favorite);else if(open)openDetail(open.dataset.open);});
-  document.querySelectorAll('[data-type]').forEach(button=>button.addEventListener('click',()=>{typeFilter=button.dataset.type;render();}));
+  document.querySelectorAll('[data-type]').forEach(button=>button.addEventListener('click',()=>{typeFilter=button.dataset.type;if(button.classList.contains('side-link')){tagFilter='全部主题';query='';document.getElementById('search').value='';renderTags();document.getElementById('collection').scrollIntoView({block:'start'});}render();}));
+  document.getElementById('sort-order').addEventListener('change',event=>{sortOrder=event.target.value;render();});
+  document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>{gallery.dataset.view=button.dataset.view;storage.set('zurenze-lens-view',button.dataset.view);document.querySelectorAll('.view-button').forEach(control=>control.setAttribute('aria-pressed',String(control===button)));}));
+  const view=storage.get('zurenze-lens-view','comfortable');
+  if(['comfortable','compact'].includes(view)){gallery.dataset.view=view;document.querySelectorAll('.view-button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.view===view)));}
   document.getElementById('tag-filters').addEventListener('click',event=>{const button=event.target.closest('[data-tag]');if(button){tagFilter=button.dataset.tag;render();}});
   document.getElementById('search').addEventListener('input',event=>{query=event.target.value.trim().toLowerCase();render();});
   document.getElementById('reset-search').addEventListener('click',()=>{query='';typeFilter='all';tagFilter='全部主题';document.getElementById('search').value='';renderTags();render();});
