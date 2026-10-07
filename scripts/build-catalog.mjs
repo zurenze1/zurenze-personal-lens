@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 const root = path.resolve(import.meta.dirname, '..');
 const items = JSON.parse(fs.readFileSync(path.join(root,'assets/library.json'),'utf8'));
 const taxonomy = JSON.parse(fs.readFileSync(path.join(root,'assets/taxonomy.json'),'utf8'));
@@ -11,6 +12,8 @@ const safeJson=value=>JSON.stringify(value).replaceAll('<','\\u003c');
 html=html.replace(/(<div class="gallery" id="gallery"[^>]*>)[\s\S]*?(<\/div>\s*<div[^>]*id="empty")/,(all,start,end)=>start+'\n'+cards+'\n'+end);
 html=html.replace(/(<script type="application\/json" id="asset-data">)[\s\S]*?(<\/script>)/,(_,a,b)=>a+safeJson(items)+b);
 html=html.replace(/(<script type="application\/json" id="taxonomy-data">)[\s\S]*?(<\/script>)/,(_,a,b)=>a+safeJson(taxonomy)+b);
+const revision=crypto.createHash('sha256').update(safeJson({items,taxonomy})).digest('hex').slice(0,12);
+html=html.replace(/(<meta name="catalog-version" content=")[^"]+("\s*\/?>)/,'$1'+revision+'$2');
 html=html.replace(/(<b id="total-count">)\d+(<\/b>)/,'$1'+items.length+'$2');
 html=html.replace(/全部素材 \/ \d+ 个条目/,'全部素材 / '+items.length+' 个条目');
 html=html.replace(/(data-type="(all|video|photo|motion|audio|note)"[^>]*>[^<]*(?:<[^>]+>[^<]*<\/[^>]+>[^<]*)?<sup>)\d+(<\/sup>)/g,(all,a,kind,b)=>a+(kind==='all'?items.length:items.filter(i=>i.kind===kind).length)+b);
