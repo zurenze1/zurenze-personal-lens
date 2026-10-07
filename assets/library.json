@@ -4,11 +4,12 @@
     "kind": "motion",
     "shotId": "M001",
     "version": "v2",
-    "title": "M001 · 六页经历／真实照片版",
+    "title": "M001 · 真实照片卡片",
     "tags": [
-      "信息展示",
+      "已用最终版",
       "真实照片",
-      "自我介绍"
+      "自我介绍",
+      "信息展示"
     ],
     "motionCategory": "information",
     "topics": [
@@ -23,9 +24,9 @@
       "扇形展开",
       "错峰入场"
     ],
-    "description": "用本人真实照片承载六项经历；保留纸卡扇形动作，匹配个人介绍影片的奶油白、深墨色与珊瑚色。当前推荐版本。无音轨，适合叠加自己的口播；源包可改姓名、照片、六卡内容、配色和时长。",
+    "description": "祖老大已明确满意并用于个人介绍影片最终版的真实照片卡片动效。六张本人照片依次展开，奶油白、深墨色与珊瑚色保持影片风格。横屏6.2秒，无音轨，可叠加自己的口播；源包可改姓名、照片、六卡内容、配色与时长。",
     "file": "assets/motion/M001/v2/preview.mp4",
-    "fileName": "M001-v2.mp4",
+    "fileName": "M001-真实照片卡片-已用最终版.mp4",
     "thumbnail": "assets/motion/M001/v2/poster.jpg",
     "sourcePackage": "assets/motion/M001/v2/source.zip",
     "breakdownFile": "motions/M001.html",
@@ -41,7 +42,11 @@
     "created": "2026-10-07T10:35:00Z",
     "status": "completed",
     "reusable": true,
-    "source": ""
+    "source": "",
+    "approvalStatus": "approved",
+    "isFinal": true,
+    "usedInVideo": true,
+    "approvedAt": "2026-10-07"
   },
   {
     "id": "motion-M001-v1",

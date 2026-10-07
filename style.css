@@ -27,3 +27,5 @@ body[data-motion=off] *{animation:none!important;transition:none!important}html:
 .shot[data-kind=motion] img{object-fit:contain;background:#f7f3e7}
 .workflow-document{display:inline-block;margin-top:22px;color:var(--accent);font-size:11px;border-bottom:1px solid #64774b;padding-bottom:5px}
 @media(max-width:680px){.motion-facets{gap:10px;padding:12px}.motion-facets label{min-width:110px}.motion-facets label:last-of-type{flex-basis:110px}.facet-note{font-size:8px}.motion-facets>button{font-size:9px}.motion-facets select{font-size:10px}}
+
+.shot .final-label{display:block;color:var(--accent);margin-top:7px;font-size:10px}.brand strong{line-height:1.7}@media(max-width:680px){.brand strong>span{margin-left:0}.brand{max-width:calc(100% - 54px)}.library-intro h1{font-size:clamp(23px,7.7vw,31px);letter-spacing:0}.shot .final-label{font-size:9px}}
