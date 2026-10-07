@@ -43,7 +43,7 @@ for(const match of html.matchAll(/\b(?:href|src)="([^"]+)"/g)){
   if(!fs.existsSync(path.join(root,url))) failures.push(`Missing resource: ${url}`);
 }
 for(const file of ['assets/video/introduction.mp4','assets/video/military.mp4']) if(!fs.existsSync(path.join(root,file))) failures.push(`Missing video: ${file}`);
-const publicText=new Set(['index.html','app.js','style.css','assets/photos.json','assets/library.json','assets/taxonomy.json','assets/publication-policy.json','docs/分类与流程.md',...assets.filter(i=>i.breakdownFile).map(i=>i.breakdownFile)]);
+const publicText=new Set(['index.html','app.js','style.css','cosmos.js','cosmos.css','assets/photos.json','assets/library.json','assets/taxonomy.json','assets/publication-policy.json','docs/分类与流程.md',...assets.filter(i=>i.breakdownFile).map(i=>i.breakdownFile)]);
 for(const file of publicText) {
   const content=fs.readFileSync(path.join(root,file),'utf8');
   if(/\/Users\/|access_token|ghp_[A-Za-z0-9]+|github_pat_[A-Za-z0-9]+/.test(content)) failures.push(`Private data in public file: ${file}`);

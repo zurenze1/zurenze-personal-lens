@@ -1,10 +1,10 @@
 {
   "name": "zurenze-personal-lens",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "private": true,
   "scripts": {
     "dev": "node server.cjs",
-    "check": "node --check app.js && node --check server.cjs && node scripts/check.mjs",
+    "check": "node --check app.js && node --check cosmos.js && node --check server.cjs && node scripts/check.mjs",
     "build": "node scripts/build-catalog.mjs"
   },
   "displayName": "祖仁泽的镜头库",

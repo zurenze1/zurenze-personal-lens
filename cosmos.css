@@ -1,0 +1,38 @@
+/* Green Planet — original artwork, quiet motion, familiar material workspace. */
+:root{--bg:#090f0d;--surface:#121c17;--sidebar:#0c1511;--paper:#eaf3ed;--muted:#93aa9c;--line:#263a30;--accent:#a7e5bc}
+body{background:radial-gradient(ellipse at 90% 0,rgba(33,82,57,.16),transparent 38%),var(--bg)}
+.sidebar{background:linear-gradient(155deg,#12231b 0%,#0c1511 38%,#0b120f 100%);border-color:#25392e}
+.brand-icon{color:#c3efd2;background:#203d2a;border-color:#3a6248;box-shadow:0 0 24px #79d9a01a}
+.brand small,.side-caption{color:#819e8c}.side-link[aria-pressed=true]{background:#253e2e;color:#d1f3dd}.side-link:hover{background:#1d3025}.side-link sup{background:#14251c;color:#a2c5af}
+.side-bottom{border-color:var(--line)}.motion-dot,.status-dot{background:#a7e5bc;box-shadow:0 0 10px #80dba877}
+.topbar{background:#09120eaa;border-color:#1d3025}.topbar-index,.topbar-slash{color:#6b927b}.topbar a{color:#c2d4c9}
+.library-intro{position:relative;isolation:isolate;overflow:hidden;display:block;min-height:384px;margin:26px 0 30px;padding:43px 40px;border:1px solid #304c39;border-radius:18px;background:#08130e;box-shadow:0 18px 75px #0003}
+.planet-scene{position:absolute;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.planet-art{width:100%;height:100%;object-fit:cover;object-position:center 49%;opacity:.87;animation:planet-drift 32s ease-in-out infinite alternate;will-change:transform}
+.planet-scene:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,15,10,.93),rgba(5,15,10,.58) 42%,rgba(5,15,10,.08) 74%),linear-gradient(0deg,rgba(4,14,9,.48),transparent 45%)}
+.planet-haze{position:absolute;inset:0;background:radial-gradient(ellipse at 82% 54%,#90ecb426,transparent 45%);mix-blend-mode:screen;animation:planet-breathe 11s ease-in-out infinite alternate}
+.planet-star{position:absolute;width:2px;height:2px;background:#dbffe5;border-radius:50%;box-shadow:0 0 6px #beffda;animation:star-glimmer 7s ease-in-out infinite alternate;opacity:.5}
+.hero-content{max-width:590px}.library-intro .eyebrow{font-size:10px;letter-spacing:2.5px;color:#b1cbb9;margin-bottom:20px;display:flex;align-items:center;gap:9px}.status-dot{width:5px;height:5px}
+.library-intro h1{font-size:clamp(39px,4.4vw,62px);line-height:1.18;letter-spacing:.025em;font-weight:500;margin:0 0 18px;text-shadow:0 2px 30px #0004}.hero-title-line{display:block}.title-dot{color:#b0ebc6}
+.library-intro .intro-copy{font-size:13px;line-height:1.95;color:#b8cabb;max-width:420px;margin:0 0 24px}.library-actions{justify-content:flex-start;flex-wrap:wrap;gap:9px}.library-intro .action-button{min-height:42px;border-radius:7px;font-size:12px;padding:0 15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.library-intro .action-button.secondary{background:#0e2015b3;color:#d2e8db;border-color:#54785d66}.library-intro .action-button.secondary:hover{background:#193c25;border-color:#82c794}
+.action-button{background:#a7e5bc;color:#10291a;border-color:#a7e5bc}.action-button:hover{background:#c0efd0;box-shadow:0 0 20px #a7e5bc24}
+.hero-coordinate{position:absolute;right:28px;bottom:23px;font-size:9px;line-height:1.9;letter-spacing:2px;color:#b5dbbf;text-align:right;opacity:.8}.hero-coordinate span{display:block;color:#719680;font-size:8px}
+.search{background:#101b15;border-color:#2b4233}.search:focus-within{border-color:#76ad88;box-shadow:0 0 0 3px #79b58a13}.filter[aria-pressed=true],.tag-filter[aria-pressed=true]{background:#243e2d;color:#c8f1d5;border-color:#52795d}.filter:hover,.tag-filter:hover{border-color:#688d72}
+.motion-facets{background:#102018;border-color:#263f2e;border-radius:10px}.motion-facets select,.sort-label select{background:#14261b;border-color:#304c39;color:#cbdfd1}.facet-note{color:#7c9a87}.motion-facets button{color:#a7e5bc}.gallery-status{color:#92ac9b}
+.shot{background:linear-gradient(150deg,#16231a,#101b14);border-color:#2a3d30;transition:transform .23s ease,border-color .23s ease,box-shadow .23s ease}.shot:hover{transform:translateY(-3px);border-color:#689d78;box-shadow:0 10px 34px #07140c,0 0 18px #7cd39b0b}.shot h3{color:#e1ece4}.shot figcaption small{color:#93ac9c}.shot-number{color:#5e806a}.cover-play{background:#12271ad9;border-color:#c5e3cf55;color:#d4f4e0}.shot-favorite[aria-pressed=true]{color:#a7e5bc;background:#183824e6}
+.workflow{border-color:#284231}.workflow article{border-color:#294331}.workflow .step-num{color:#9cdbb1}footer{border-color:#23372a;color:#8faa99}dialog{background:#101d15;border-color:#395941}dialog::backdrop{background:#030a07d9}.dialog-info,.dialog-nav{border-color:#2d4435}.detail-tags span{background:#233b2a;color:#bee6cb}
+:focus-visible{outline:2px solid #afecc5;outline-offset:4px}
+.scene-paused .planet-art,.scene-paused .planet-haze,.scene-paused .planet-star{animation-play-state:paused;will-change:auto}
+@keyframes planet-drift{from{transform:scale(1.025) translate(-.6%,.3%) rotate(-.25deg)}to{transform:scale(1.085) translate(.8%,-.5%) rotate(.3deg)}}
+@keyframes planet-breathe{from{opacity:.3}to{opacity:.8}}
+@keyframes star-glimmer{from{opacity:.15;transform:scale(.7)}to{opacity:.8;transform:scale(1.15)}}
+body[data-motion=off] .planet-art{transform:scale(1.025)}body[data-motion=off] *:before,body[data-motion=off] *:after{animation:none!important;transition:none!important}
+@media(min-width:1700px){.library-intro{min-height:426px;padding:48px}.library-intro h1{font-size:66px}.planet-art{object-position:center 52%}}
+@media(max-width:1150px){.library-intro{padding:35px 30px;min-height:364px}.library-intro h1{font-size:50px}.hero-coordinate{right:22px}}
+@media(max-width:880px){.library-intro{padding:32px 26px;min-height:354px}.library-intro h1{font-size:44px}.planet-art{object-position:62% center}.planet-scene:after{background:linear-gradient(90deg,#05120bec,rgba(5,18,11,.66) 48%,#05120b22)}.hero-coordinate{display:none}}
+@media(max-width:680px){.library-intro{margin:20px 0 26px;padding:30px 25px 28px;min-height:384px;border-radius:14px}.library-intro h1{font-size:44px;line-height:1.2;margin-bottom:16px}.library-intro .eyebrow{font-size:8px;letter-spacing:1.8px;margin-bottom:22px}.planet-art{object-position:64% 50%;opacity:.8;animation:none;transform:scale(1.035)}.planet-scene:after{background:linear-gradient(90deg,#06150be8,rgba(5,18,11,.48) 70%),linear-gradient(0deg,#06150be0,transparent 65%)}.library-intro .intro-copy{font-size:12px;line-height:2;max-width:265px;margin-bottom:24px}.library-intro .mobile-break{display:none}.library-actions{max-width:275px;gap:8px}.library-intro .action-button{font-size:11px;min-height:40px;padding:0 12px}.library-intro .action-button[data-note]{min-height:36px;background:transparent;border-color:transparent;padding-left:0;color:#a8c5b1}.sidebar{background:linear-gradient(120deg,#12231a,#0c1511)}.motion-facets{padding:13px}.shot:hover{transform:none}}
+@media(max-width:360px){.library-intro{padding:27px 20px;min-height:375px}.library-intro h1{font-size:39px}.library-intro .eyebrow{font-size:7px;letter-spacing:1.5px}.library-intro .intro-copy{font-size:11px}.library-actions{gap:6px}.library-intro .action-button{font-size:10px;padding:0 10px}}
+@media(prefers-reduced-motion:reduce){.planet-art{transform:scale(1.025);will-change:auto}}
+
+.filter sup{background:#213b2a;color:#91b89f}.filter[aria-pressed=true] sup{background:#35583e;color:#c0edce}.tag-filter{color:#a0b8a8}.filter-label{color:#809d8a}.view-button[aria-pressed=true]{background:#2b4b35;color:#cdf1d8}
