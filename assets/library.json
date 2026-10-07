@@ -1,0 +1,411 @@
+[
+  {
+    "id": "film-introduction",
+    "kind": "video",
+    "title": "我的自我介绍",
+    "description": "完整原声自我介绍视频，可用于个人视频的片段选择与参考。",
+    "tags": [
+      "人物",
+      "原声"
+    ],
+    "file": "assets/video/introduction.mp4",
+    "fileName": "祖仁泽-自我介绍.mp4",
+    "thumbnail": "assets/video/ip-course-introduction-poster.webp",
+    "duration": "02:49",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/about.html#self-intro",
+    "local": false
+  },
+  {
+    "id": "film-military",
+    "kind": "video",
+    "title": "两年军旅总结回忆",
+    "description": "本人已公开的两年军旅总结回忆，保留完整原声与时长。",
+    "tags": [
+      "军旅记忆",
+      "原声"
+    ],
+    "file": "assets/video/military.mp4",
+    "fileName": "祖仁泽-军旅回忆.mp4",
+    "thumbnail": "assets/video/military-moments-poster.webp",
+    "duration": "02:25",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/journey.html#military-film",
+    "local": false
+  },
+  {
+    "id": "memory-1",
+    "kind": "photo",
+    "title": "海边的我",
+    "description": "海边的我 · 带着相机去看看世界",
+    "tags": [
+      "山海之间"
+    ],
+    "file": "assets/images/coastal-rocks.webp",
+    "thumbnail": "assets/images/coastal-rocks-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/seaside/coastal-rocks.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-3",
+    "kind": "photo",
+    "title": "红衣与山林",
+    "description": "外出旅行 · 民族服装体验",
+    "tags": [
+      "山海之间"
+    ],
+    "file": "assets/images/travel-red.webp",
+    "thumbnail": "assets/images/travel-red-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/travel/travel-red.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-14",
+    "kind": "photo",
+    "title": "山火现场",
+    "description": "2022 年重庆山火扑救现场记录",
+    "tags": [
+      "军旅记忆"
+    ],
+    "file": "assets/images/fire-rescue.webp",
+    "thumbnail": "assets/images/fire-rescue-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/fire-rescue.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-8",
+    "kind": "photo",
+    "title": "山间寺院",
+    "description": "寺院与庭院 · 看建筑，也让脚步慢下来。",
+    "tags": [
+      "静处"
+    ],
+    "file": "assets/images/temple-panorama.webp",
+    "thumbnail": "assets/images/temple-panorama-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/temple/temple-panorama.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-10",
+    "kind": "photo",
+    "title": "沿着海边走",
+    "description": "沿着海边走 · 脚边是浪，眼前是海。",
+    "tags": [
+      "山海之间"
+    ],
+    "file": "assets/images/shoreline.webp",
+    "thumbnail": "assets/images/shoreline-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/seaside/shoreline.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-2",
+    "kind": "photo",
+    "title": "军旅留影",
+    "description": "军旅留影 · 那时的自己",
+    "tags": [
+      "军旅记忆"
+    ],
+    "file": "assets/images/uniform.webp",
+    "thumbnail": "assets/images/uniform-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/military/uniform.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-19",
+    "kind": "photo",
+    "title": "望向夕阳",
+    "description": "祖仁泽站在海边，望向夕阳",
+    "tags": [
+      "山海之间"
+    ],
+    "file": "assets/images/sunset.webp",
+    "thumbnail": "assets/images/sunset-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/sunset.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-25",
+    "kind": "photo",
+    "title": "凭栏看山",
+    "description": "外出旅行体验民族服装，坐在木质栏杆旁，身后是山林与村落",
+    "tags": [
+      "山海之间"
+    ],
+    "file": "assets/images/travel-balcony.webp",
+    "thumbnail": "assets/images/travel-balcony-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/travel/travel-balcony.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-4",
+    "kind": "photo",
+    "title": "毕业时刻",
+    "description": "完成学业，留下一张毕业照。",
+    "tags": [
+      "日常现场"
+    ],
+    "file": "assets/images/graduation.webp",
+    "thumbnail": "assets/images/graduation-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/graduation/graduation.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-22",
+    "kind": "photo",
+    "title": "殿前一景",
+    "description": "寺院天王殿前的石阶、雕花梁柱、红灯笼与石象",
+    "tags": [
+      "静处"
+    ],
+    "file": "assets/images/temple-hall.webp",
+    "thumbnail": "assets/images/temple-hall-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/temple/temple-hall.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-6",
+    "kind": "photo",
+    "title": "咖啡片刻",
+    "description": "工作之间，喝杯咖啡的片刻。",
+    "tags": [
+      "日常现场"
+    ],
+    "file": "assets/images/coffee-break.webp",
+    "thumbnail": "assets/images/coffee-break-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/work/coffee-break.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-28",
+    "kind": "photo",
+    "title": "望向梯田",
+    "description": "外出旅行体验黑色民族服装，身后是梯田和木质建筑群",
+    "tags": [
+      "山海之间"
+    ],
+    "file": "assets/images/travel-overlook.webp",
+    "thumbnail": "assets/images/travel-overlook-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/travel/travel-overlook.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-9",
+    "kind": "photo",
+    "title": "球场热爱",
+    "description": "大学棒球队 · 球场上的一份热爱。",
+    "tags": [
+      "日常现场"
+    ],
+    "file": "assets/images/baseball.webp",
+    "thumbnail": "assets/images/baseball-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/baseball.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-17",
+    "kind": "photo",
+    "title": "海边晚霞",
+    "description": "祖仁泽穿蓝色衬衫站在海边，天空呈柔和的晚霞色",
+    "tags": [
+      "山海之间"
+    ],
+    "file": "assets/images/seaside-moment.webp",
+    "thumbnail": "assets/images/seaside-moment-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/seaside-moment.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-5",
+    "kind": "photo",
+    "title": "战友合影",
+    "description": "军旅时期，与战友一起留下的合影。",
+    "tags": [
+      "军旅记忆"
+    ],
+    "file": "assets/images/comrades.webp",
+    "thumbnail": "assets/images/comrades-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/military/comrades.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-23",
+    "kind": "photo",
+    "title": "庭院与水面",
+    "description": "寺院庭院里的水池、雕像、花树与远处的山",
+    "tags": [
+      "静处"
+    ],
+    "file": "assets/images/temple-garden.webp",
+    "thumbnail": "assets/images/temple-garden-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/temple/temple-garden.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-26",
+    "kind": "photo",
+    "title": "看向远方",
+    "description": "外出旅行体验红色民族服装，侧身望向远处的山林",
+    "tags": [
+      "山海之间"
+    ],
+    "file": "assets/images/travel-looking-out.webp",
+    "thumbnail": "assets/images/travel-looking-out-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/travel/travel-looking-out.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-15",
+    "kind": "photo",
+    "title": "工作之间",
+    "description": "祖仁泽的工作日常",
+    "tags": [
+      "日常现场"
+    ],
+    "file": "assets/images/work.webp",
+    "thumbnail": "assets/images/work-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/work.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-11",
+    "kind": "photo",
+    "title": "梯田之间",
+    "description": "外出旅行 / 民族服装体验。",
+    "tags": [
+      "山海之间"
+    ],
+    "file": "assets/images/travel-fields.webp",
+    "thumbnail": "assets/images/travel-fields-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/travel/travel-fields.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-16",
+    "kind": "photo",
+    "title": "寺院小住",
+    "description": "祖仁泽在寺院小住时的照片",
+    "tags": [
+      "静处"
+    ],
+    "file": "assets/images/temple.webp",
+    "thumbnail": "assets/images/temple-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/temple.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-21",
+    "kind": "photo",
+    "title": "任务之外",
+    "description": "戴着迷彩帽、穿黑色上衣的军旅日常留影",
+    "tags": [
+      "军旅记忆"
+    ],
+    "file": "assets/images/off-duty.webp",
+    "thumbnail": "assets/images/off-duty-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/military/off-duty.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-24",
+    "kind": "photo",
+    "title": "建筑细节",
+    "description": "华严堂前的雕花建筑与塔的细节",
+    "tags": [
+      "静处"
+    ],
+    "file": "assets/images/temple-details.webp",
+    "thumbnail": "assets/images/temple-details-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/temple/temple-details.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-27",
+    "kind": "photo",
+    "title": "红衣留影",
+    "description": "外出旅行体验红色民族服装，抱臂站在梯田前",
+    "tags": [
+      "山海之间"
+    ],
+    "file": "assets/images/travel-landscape.webp",
+    "thumbnail": "assets/images/travel-landscape-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/travel/travel-landscape.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-18",
+    "kind": "photo",
+    "title": "跑步时刻",
+    "description": "祖仁泽穿着绿色上衣，在户外跑步",
+    "tags": [
+      "日常现场"
+    ],
+    "file": "assets/images/running.webp",
+    "thumbnail": "assets/images/running-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/running.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-7",
+    "kind": "photo",
+    "title": "活动现场",
+    "description": "活动现场，镜头也是表达的开始。",
+    "tags": [
+      "日常现场"
+    ],
+    "file": "assets/images/work-event.webp",
+    "thumbnail": "assets/images/work-event-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/work-event.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-20",
+    "kind": "photo",
+    "title": "山间旅途",
+    "description": "祖仁泽在一次外出旅行中体验民族服装，身后有山林、村落与梯田",
+    "tags": [
+      "山海之间"
+    ],
+    "file": "assets/images/mountain-journey.webp",
+    "thumbnail": "assets/images/mountain-journey-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/mountain-journey.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-29",
+    "kind": "photo",
+    "title": "观景处的一刻",
+    "description": "外出旅行体验黑色民族服装，站在木质观景标牌旁",
+    "tags": [
+      "山海之间"
+    ],
+    "file": "assets/images/travel-viewpoint.webp",
+    "thumbnail": "assets/images/travel-viewpoint-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/photos/travel/travel-viewpoint.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-13",
+    "kind": "photo",
+    "title": "军旅日常",
+    "description": "祖仁泽在军旅时期的记录",
+    "tags": [
+      "军旅记忆"
+    ],
+    "file": "assets/images/military.webp",
+    "thumbnail": "assets/images/military-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/military.jpg",
+    "local": false
+  },
+  {
+    "id": "memory-12",
+    "kind": "photo",
+    "title": "一张肖像",
+    "description": "祖仁泽的正式肖像，白衬衫与蓝色领带",
+    "tags": [
+      "肖像"
+    ],
+    "file": "assets/images/profile-formal.webp",
+    "thumbnail": "assets/images/profile-formal-small.webp",
+    "source": "https://zurenze1.github.io/zurenze-personal-site/assets/profile-formal.jpg",
+    "local": false
+  }
+]

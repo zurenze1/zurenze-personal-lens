@@ -1,0 +1,9 @@
+{
+  "name": "zurenze-personal-lens",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.cjs",
+    "check": "node --check app.js && node --check server.cjs && node scripts/check.mjs"
+  }
+}
