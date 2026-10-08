@@ -36,3 +36,26 @@ body[data-motion=off] .planet-art{transform:scale(1.025)}body[data-motion=off] *
 @media(prefers-reduced-motion:reduce){.planet-art{transform:scale(1.025);will-change:auto}}
 
 .filter sup{background:#213b2a;color:#91b89f}.filter[aria-pressed=true] sup{background:#35583e;color:#c0edce}.tag-filter{color:#a0b8a8}.filter-label{color:#809d8a}.view-button[aria-pressed=true]{background:#2b4b35;color:#cdf1d8}
+
+/* Space responds to input; depth layers remain independent of the ambient drift. */
+.library-intro{touch-action:pan-y;--scene-x:0px;--scene-y:0px;--scene-r:0deg;--pointer-x:75%;--pointer-y:50%}
+.planet-depth{position:absolute;inset:-28px;transform:translate3d(var(--scene-x),var(--scene-y),0) rotate(var(--scene-r)) scale(1.035);will-change:transform;animation:planet-arrive 1.25s cubic-bezier(.2,.75,.25,1) backwards}
+.planet-stars{position:absolute;inset:-20px;transform:translate3d(calc(var(--scene-x)*-.55),calc(var(--scene-y)*-.6),0);pointer-events:none}
+.planet-light{position:absolute;inset:0;background:radial-gradient(ellipse 320px 240px at var(--pointer-x) var(--pointer-y),#a9ffcc40,#81e6a410 45%,transparent 75%);mix-blend-mode:screen;opacity:.12;transition:opacity .4s ease;pointer-events:none}
+.library-intro.is-pointing .planet-light{opacity:.9}
+.planet-wave{position:absolute;width:80px;height:80px;border-radius:50%;border:1px solid #b8ffd7aa;box-shadow:0 0 25px #8af5b23b,inset 0 0 15px #8af5b222;pointer-events:none;animation:planet-wave 1.3s ease-out forwards}
+.planet-controls{position:absolute;right:28px;bottom:22px;text-align:right;z-index:1}.planet-view{display:inline-flex;gap:7px;align-items:center;color:#c4ead1;border:1px solid #81b99266;background:#102d1cd1;border-radius:20px;padding:8px 13px;min-height:36px;font-size:10px;letter-spacing:.04em;transition:background .2s,border-color .2s,box-shadow .2s}.planet-view:hover{background:#275436;border-color:#b6efc6;box-shadow:0 0 24px #89e7a83b}.planet-view:active{transform:scale(.97)}.planet-view:disabled{opacity:.5;cursor:default}.planet-controls p{font-size:9px;color:#a6c9b2;letter-spacing:1px;margin:9px 0 0}.planet-view span{font-size:15px}
+.hero-content .eyebrow{animation:content-arrive .7s .05s ease-out backwards}.hero-content h1{animation:content-arrive .75s .13s ease-out backwards}.hero-content .intro-copy{animation:content-arrive .75s .21s ease-out backwards}.library-actions{animation:content-arrive .75s .3s ease-out backwards}
+.action-button span{transition:transform .2s ease}.action-button:hover span{transform:translate(2px,-1px)}.action-button:active{transform:scale(.97)}
+.shot{position:relative;transition:transform .24s ease,border-color .24s ease,box-shadow .24s ease;transform-style:preserve-3d}.shot.is-pointing{transform:perspective(900px) translateY(-6px) rotateX(var(--card-rx,0deg)) rotateY(var(--card-ry,0deg));border-color:#91cfa3;box-shadow:0 14px 36px #0005,0 0 22px #75cb921c}.shot:after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(ellipse at var(--card-x,50%) var(--card-y,50%),#b6ffd014,transparent 58%);opacity:0;transition:opacity .25s}.shot.is-pointing:after{opacity:1}.shot.card-enter{animation:card-arrive .5s var(--entry-delay,0ms) cubic-bezier(.2,.7,.2,1) backwards}
+.scene-paused .planet-depth{animation-play-state:paused;will-change:auto}
+@keyframes planet-arrive{from{opacity:0;transform:scale(1.15) translateX(22px)}to{opacity:1;transform:translate3d(var(--scene-x),var(--scene-y),0) rotate(var(--scene-r)) scale(1.035)}}
+@keyframes content-arrive{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes card-arrive{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes planet-wave{from{opacity:.9;transform:translate(-50%,-50%) scale(.15)}to{opacity:0;transform:translate(-50%,-50%) scale(7)}}
+body[data-motion=off] .planet-depth{transform:scale(1.035);will-change:auto}body[data-motion=off] .planet-stars{transform:none}body[data-motion=off] .planet-light{opacity:0}body[data-motion=off] .shot.is-pointing{transform:none}
+@media(max-width:880px){.planet-controls{right:22px;bottom:19px}}
+@media(max-width:680px){.library-intro{min-height:408px;padding-bottom:74px}.planet-depth{inset:-18px}.planet-light{background:radial-gradient(ellipse 200px 180px at var(--pointer-x) var(--pointer-y),#a9ffcc32,transparent 75%)}.planet-controls{right:20px;bottom:19px}.planet-controls p{font-size:8px;letter-spacing:.5px}.planet-view{padding:7px 11px;min-height:34px;font-size:9px}.shot.is-pointing{transform:none}.hero-content h1{animation-duration:.6s}}
+@media(prefers-reduced-motion:reduce){.planet-depth{transform:scale(1.035);will-change:auto}.planet-stars{transform:none}.planet-light{opacity:0}.shot.is-pointing{transform:none}}
+
+body[data-motion=off] .shot:hover{transform:none}@media(prefers-reduced-motion:reduce){.shot:hover{transform:none}}

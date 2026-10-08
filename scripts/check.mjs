@@ -40,7 +40,7 @@ for(const match of html.matchAll(/\b(?:href|src)="([^"]+)"/g)){
   const url=match[1];
   if(!url || /^(https?:|data:|mailto:)/.test(url)) continue;
   if(url.startsWith('#')) {if(url.length>1 && !ids.includes(url.slice(1))) failures.push(`Missing anchor ${url}`);continue;}
-  if(!fs.existsSync(path.join(root,url))) failures.push(`Missing resource: ${url}`);
+  if(!fs.existsSync(path.join(root,url.split(/[?#]/)[0]))) failures.push(`Missing resource: ${url}`);
 }
 for(const file of ['assets/video/introduction.mp4','assets/video/military.mp4']) if(!fs.existsSync(path.join(root,file))) failures.push(`Missing video: ${file}`);
 const publicText=new Set(['index.html','app.js','style.css','cosmos.js','cosmos.css','assets/photos.json','assets/library.json','assets/taxonomy.json','assets/publication-policy.json','docs/分类与流程.md',...assets.filter(i=>i.breakdownFile).map(i=>i.breakdownFile)]);
